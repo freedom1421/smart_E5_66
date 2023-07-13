@@ -22,10 +22,13 @@
     }
    },
    methods: {
-    onSave(){
-      console.log("Save data");
-      console.log(this.name)
-    }
-   },
+  async onSave(){
+    console.log(this.name)
+    const url = 'http://localhost:7001/lists';
+    const res = await fetch(url);
+    const data = await res.json()
+    console.log('data=>',data)
+  }
+ },
   }
   </script>
