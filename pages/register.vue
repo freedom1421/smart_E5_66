@@ -128,7 +128,7 @@
         const url = 'http://localhost:7001/insert?name='+ this.username +'&password=' + this.password + '&dep='+ this.dep ;
         const res = await fetch(url);
         const data = await res.json()
-        if (data.ok == 't') {
+        if (data.ok == 1) {
           console.log('save success');
          this.dialog = true
         } else {
