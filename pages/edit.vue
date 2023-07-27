@@ -33,7 +33,7 @@
       </v-btn>
       <v-btn
         color="warning"
-        @click="doSave"
+        @click="doupdate"
       >
         Save
       </v-btn>
@@ -47,11 +47,11 @@
       >
            <v-card>
           <v-card-title class="text-h5 grey lighten-2">
-            สถานะการบันทึก
+            สถานะการอัปเดต
           </v-card-title>
   
           <v-card-text>
-             บันทึกข้อมูลสำเร็จ
+            อัปเดตข้อมูลสำเร็จ
           </v-card-text>
   
           <v-divider></v-divider>
@@ -61,7 +61,7 @@
             <v-btn
               color="primary"
               text
-              @click="dialog = false"
+              @click="reweb"
             >
               ตกลง
             </v-btn>
@@ -77,11 +77,11 @@
       >
            <v-card>
           <v-card-title class="text-h5 grey lighten-2">
-            สถานะการบันทึก
+            สถานะการอัปเดต
           </v-card-title>
   
           <v-card-text>
-             บันทึกข้อมูลไม่สำเร็จ
+            อัปเดตข้อมูลไม่สำเร็จ
           </v-card-text>
   
           <v-divider></v-divider>
@@ -130,33 +130,36 @@
            this.dep =  data.datas.dep
       },
       methods: {
-        async doSave () {
+        async doupdate () {
           console.log('save data')
           console.log(this.username)
           console.log(this.password)
           console.log(this.dep)
       
           //http://localhost/7001/insert?name=username&passwd=password&dep=dep
-           const url = 'http://localhost:7001/insert?name='+ this.username +'&passwd=' + this.password + '&dep='+ this.dep ;
+           const url = 'http://localhost:7001/update?username='+ this.username +'&password=' + this.password + '&dep='+ this.dep +'&id='+ this.id ;
            const res = await fetch(url);
            const data = await res.json()
            console.log(data.ok)
-           this.username = ""
-           this.password = ""
-           this.dep = ""
+          //  this.username = ""
+          //  this.password = ""
+          //  this.dep = ""
   
            if(data.ok == 1){
-            console.log('save success')
+            console.log('update success')
             this.dialog = true
            }else{
-            console.log('NO success')
+            console.log('update not success')
             this.dialog_error = true
            }
         },
-        reset () {
-         
+         reset () {
           this.$refs.form.reset()
         },
+        reweb(){
+          this.$router.replace('/list')
+          this.dialog = false
+        }
        },
     }
   </script>
