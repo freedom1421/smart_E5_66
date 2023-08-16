@@ -24,6 +24,7 @@
         label="DEPARTMENT"
         required
       ></v-select>
+      <v-file-input v-model="file" accept="image/*"> </v-file-input>
       <v-btn
         color="error"
         class="mr-4"
@@ -109,6 +110,7 @@
         username: '',
         password: '',   
         dep: null,
+        img: '',
         dialog: false,
         dialog_error : false,
         items: [
@@ -128,6 +130,8 @@
            this.username =  data.datas.username
            this.password =  data.datas.password
            this.dep =  data.datas.dep
+           this.img = data.datas.img
+
       },
       methods: {
         async doupdate () {
@@ -135,9 +139,10 @@
           console.log(this.username)
           console.log(this.password)
           console.log(this.dep)
+          console.log(this.img)
       
           //http://localhost/7001/insert?name=username&passwd=password&dep=dep
-           const url = 'http://localhost:7001/update?username='+ this.username +'&password=' + this.password + '&dep='+ this.dep +'&id='+ this.id ;
+           const url = 'http://localhost:7001/update?username='+ this.username +'&password=' + this.password + '&dep='+ this.dep +'&img='+ this.img +'&id='+ this.id ;
            const res = await fetch(url);
            const data = await res.json()
            console.log(data.ok)
