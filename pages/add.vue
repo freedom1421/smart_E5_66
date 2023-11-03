@@ -81,35 +81,17 @@ export default {
       console.log(this.username);
       console.log(this.password);
       console.log(this.dep);
-      //http://localhost/7001/insert?name=username&passwd=password&dep=dep
-      //  const url = 'http://localhost:7001/insert?name='+ this.username +'&passwd=' + this.password + '&dep='+ this.dep ;
-      //  const res = await fetch(url);
-      //  const data = await res.json()
-      // const std = {
-      //   username: this.username,
-      //   password: this.password,
-      //   dep: this.dep,
-      //   file: this.file[0],
-      // };
       const formData = new FormData();
       formData.append("file", this.file[0]);
       formData.append("username", this.username);
       formData.append("password", this.password);
       formData.append("dep", this.dep);
-      // console.log("user:", std);
       const res = await axios.post("http://localhost:7001/add", formData);
-      // console.log(data.ok);
+      console.log(data.ok);
       this.username = "";
       this.password = "";
       this.dep = "";
-
-      // if (data.ok == 1) {
-      //   console.log("save success");
-      //   this.dialog = true;
-      // } else {
-      //   console.log("NO success");
-      //   this.dialog_error = true;
-      // }
+      
     },
     reset() {
       this.$refs.form.reset();

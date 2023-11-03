@@ -32,7 +32,6 @@
     <v-dialog v-model="dialog" width="500">
       <v-card>
         <v-card-title class="text-h5 grey lighten-2"> สถานะการลบ </v-card-title>
-
         <v-card-text>
           {{ status }}
         </v-card-text>
@@ -55,11 +54,31 @@ export default {
       dialog: false,
       name: "alongkorn",
       age: 50,
-      student: [],
+      student: [
+        {
+          id: "111",
+          username: "6339030001",
+          password: "sutaluk",
+          dep: "Test1",
+        },
+        {
+          id: "112",
+          username: "6339030002",
+          password: "Teerapong",
+          dep: "Test2",
+        },
+        {
+          id: "113",
+          username: "6339030003",
+          password: "Wanaruk",
+          dep: "Test3",
+        },
+      ],
     };
-  },created(){
-      this.onShow();
-    },
+  },
+  created() {
+    this.onShow();
+  },
   methods: {
     editItem(id) {
       console.log("id", id);
@@ -69,7 +88,7 @@ export default {
     async deleteItem(id) {
       this.dialog = false;
       console.log("id_true=", id);
-      const url = "http://localhost:7001/delete?id=" + id;
+      const url = "http://localhost:7001/del?id=" + id;
       const res = await fetch(url);
       const data = await res.json();
       setTimeout(() => {
