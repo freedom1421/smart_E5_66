@@ -105,7 +105,7 @@
   <script>
     export default {
       data: () => ({
-        valid: true,
+    valid: true,
         id: '',
         username: '',
         password: '',   
