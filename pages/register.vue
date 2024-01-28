@@ -1,43 +1,61 @@
 <template>
+  <div style="background-color: #265073;  width:auto;  height: 750px; padding-top: 50px;"> 
+  <div class="form_regis"> 
+    <h1 style="color: #265073; font-size: 50px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Register</h1>
   <v-form
     ref="form"
     v-model="valid"
     lazy-validation
   >
+    <h5 style="text-align: left; margin: 30px 0px 0px 0px; font-size: 20px;color: #265073;">Username</h5>
     <v-text-field
       v-model="username"
       :counter="10"
-      label="UserName"
       required
+      style="margin: 0px 0px 20px 0px;
+      background-color: #9AD0C2;
+      height: 55px;"
     ></v-text-field>
-
+    <h5 style="text-align: left; margin: 0px 0px 0px 0px; font-size: 20px;color: #265073;">Password</h5>
     <v-text-field
       v-model="password"
-      label="Password"
+      :counter="8"
       required
+      style="margin: 0px 0px 30px 0px;
+      background-color: #9AD0C2;
+      height: 55px;"
     ></v-text-field>
-
+    <h5 style="text-align: left; margin: 30px 0px 0px 0px; font-size: 20px;color: #265073; ">Department</h5>
     <v-select
       v-model="dep"
       :items="items"
-      label="DEPARTMENT"
       required
+      style="margin: 0px 0px 30px 0px;
+      background-color: #9AD0C2;
+      height: 55px;"
     ></v-select>
-    <v-btn
-      color="error"
+    <!-- <v-btn
       class="mr-4"
       @click="reset"
+      style="margin: 10px 0px; 
+      background-color: black;
+      color: aliceblue;"
+      width="100px"
     >
-      Reset Form
-    </v-btn>
+      Login
+    </v-btn> -->
     <v-btn
-      color="warning"
+      style="margin: 10px 0px; 
+      background-color: #2D9596;
+      color: #ffff;"
+      width="100px"
       @click="doSave"
     >
       Save
     </v-btn>
+    <br><h4>if you have account click for <a href="/login">login</a></h4>
   </v-form>
-  
+</div>
 
   <div class="text-center">
     <v-dialog
@@ -60,10 +78,11 @@
           <v-btn
             color="primary"
             text
-            @click="dialog = false"
+            @click="navigateTo('/login')"
           >
             ตกลง
           </v-btn>
+
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -98,7 +117,7 @@
       </v-card>
     </v-dialog>
   </div>
-  
+</div>
 </template>
 <script>
   export default {
@@ -138,9 +157,23 @@
 
       },
       
-      reset () {
-        this.$refs.form.reset()
-      },
+      // reset () {
+      //   this.$refs.form.reset()
+      // },
      },
   }
 </script>
+
+
+<style>
+    .form_regis{
+      margin: 0px auto 0px auto;
+      background-color: #ECF4D6;
+      height: 600px;
+      width: 500px;
+      padding: 30px;
+      text-align:center;
+    border-radius: 50px;
+    }
+    
+</style>

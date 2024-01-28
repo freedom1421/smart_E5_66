@@ -98,7 +98,7 @@ app.get('/list', async (req, res) => {
       error: e.message
     })
   }
-})
+});
 
 app.post("/update", upload.any(), async (req, res) => {
   try {
@@ -293,6 +293,6 @@ app.post("/add", upload.any(), async (req, res) => {
     });
   }
 }); // insert
-app.listen(7001, () => {
+app.listen(7002, () => {
   console.log('7001')
 })

@@ -8,8 +8,9 @@
     <template v-slot:top>
       <v-toolbar
         flat
+        style="background-color: #ECF4D6; "
       >
-        <v-toolbar-title>ข้อมูล ของฉัน</v-toolbar-title>
+        <v-toolbar-title style="font-size: 30px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: #265073;">User total</v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
@@ -21,14 +22,7 @@
           max-width="500px"
         >
           <template v-slot:activator="{ props }">
-            <v-btn
-              color="primary"
-              dark
-              class="mb-2"
-              v-bind="props"
-            >
-              เพิ่มสมาชิก
-            </v-btn>
+            <v-btn icon @click="navigateTo('/')"><v-icon style="color: #265073; font-size: 40px; width: 40px; justify-self: start;">mdi-arrow-left-circle</v-icon></v-btn>
           </template>
           <v-card>
             <v-card-title>
@@ -68,9 +62,9 @@
                       label="Department"
                     ></v-text-field>
                   </v-col>
-                <v-col>
+                <!-- <v-col>
                   <v-file-input v-model="file" accept="image/*" ></v-file-input>
-                </v-col>
+                </v-col> -->
                 </v-row>
               </v-container>
             </v-card-text>
@@ -115,7 +109,7 @@
         class="me-2"
         @click="editItem(item.raw)"
       >
-        mdi-pencil
+      mdi-account-edit
       </v-icon>
       <v-icon
         size="small"
@@ -137,6 +131,21 @@
 <script>
 import axios from 'axios';
   export default {
+    setup(){
+      const checkTokenExists = () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+          console.log('มี token อยู่ใน localStorage');
+        } else {
+          console.log('ไม่มี token ใน localStorage');
+          navigateTo('/login')
+        }
+      };
+  
+      onMounted(() => {
+        checkTokenExists();
+      });
+    },
     data: () => ({
       
       dialog: false,
@@ -150,7 +159,7 @@ import axios from 'axios';
         },
         { title: 'Password', key: 'password' },
         { title: 'Department', key: 'dep' },
-        {title: 'Image', key: 'img'},
+        // {title: 'Image', key: 'img'},
         { title: 'Actions', key: 'actions', sortable: false },
       ],
       desserts: [],
@@ -159,6 +168,7 @@ import axios from 'axios';
         username: '',
         password: '',
         dep: '',
+        img: ''
       },
       defaultItem: {
         username: '',
@@ -188,6 +198,9 @@ import axios from 'axios';
     },
 
     methods: {
+      async back(){
+        navigateTo("/")
+      },  
     async showdata(){
     const url = 'http://localhost:7001/list';
     const res = await fetch(url);
@@ -246,6 +259,10 @@ import axios from 'axios';
           const res = await axios.post('http://localhost:7001/add',this.editedItem)
           console.log('data=',this.editedItem)
         }
+        setTimeout(() => {
+          this.showdata()
+          console.log('edit sussess')
+         }, 1500);
         this.close()
       },
     },
