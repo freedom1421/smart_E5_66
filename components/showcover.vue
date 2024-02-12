@@ -27,19 +27,19 @@
 <script>
 export default {
     setup() {
-        const checkTokenExists = () => {
-            const token = localStorage.getItem('token');
-            if (token) {
-                console.log('มี token อยู่ใน localStorage');
-            } else {
-                console.log('ไม่มี token ใน localStorage');
-                navigateTo('/login')
-            }
-        };
+        // const checkTokenExists = () => {
+        //     const token = localStorage.getItem('token');
+        //     if (token) {
+        //         console.log('มี token อยู่ใน localStorage');
+        //     } else {
+        //         console.log('ไม่มี token ใน localStorage');
+        //         navigateTo('/login')
+        //     }
+        // };
 
-        onMounted(() => {
-            checkTokenExists();
-        });
+        // onMounted(() => {
+        //     checkTokenExists();
+        // });
     },
     data: () => ({
 
@@ -66,10 +66,10 @@ export default {
             navigateTo("/")
         },
         async showdata() {
-            const url = 'http://localhost:7001/listcover';
+            const url = 'https://smart-farm-node.onrender.com/listcover';
             const res = await fetch(url);
             const data = await res.json()
-            this.desserts = data.datas
+            this.desserts = data.datas.reverse();
             console.log('data=>', data.datas)
         },
     },

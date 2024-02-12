@@ -59,19 +59,19 @@
 
 export default {
   setup() {
-    const checkTokenExists = () => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        console.log('มี token อยู่ใน localStorage');
-      } else {
-        console.log('ไม่มี token ใน localStorage');
-        navigateTo('/login')
-      }
-    };
+    // const checkTokenExists = () => {
+    //   const token = localStorage.getItem('token');
+    //   if (token) {
+    //     console.log('มี token อยู่ใน localStorage');
+    //   } else {
+    //     console.log('ไม่มี token ใน localStorage');
+    //     navigateTo('/login')
+    //   }
+    // };
 
-    onMounted(() => {
-      checkTokenExists();
-    });
+    // onMounted(() => {
+    //   checkTokenExists();
+    // });
     useHead({
       script: ["/dist/mqtt/mqtt.min.js"],
     });
