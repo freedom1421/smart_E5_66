@@ -42,15 +42,14 @@ export default {
         // });
     },
     data: () => ({
-
         dialog: false,
         dialogDelete: false,
         headers: [
             { title: 'Date', key: 'Date' },
             { title: 'Time', key: 'Time' },
-            { title: 'temperature', key: 'Temp' },
+            { title: 'temperature', key: 'Temperature' },
             { title: 'humidity', key: 'Humidity' },
-            { title: 'pH Value', key: 'PH_value' },
+            { title: 'pH Value', key: 'pH_value' },
         ],
         desserts: [],
         
@@ -66,7 +65,7 @@ export default {
             navigateTo("/")
         },
         async showdata() {
-            const url = 'https://smart-farm-node.onrender.com/listcover';
+            const url = 'http://localhost:7001/listcover';  
             const res = await fetch(url);
             const data = await res.json()
             this.desserts = data.datas.reverse();

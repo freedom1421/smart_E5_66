@@ -4,16 +4,14 @@ const bodyParser = require('body-parser');
 const knex = require('knex');
 const app = express();
 const multer = require('multer');
-const bcrypt = require('bcrypt'); // Import the bcrypt library for password hashing
+const bcrypt = require('bcrypt'); 
 const jwt = require('jsonwebtoken');
 require('dotenv').config()
 
-// Import your User model and authentication functions from "auth"
 const { register, login } = require('auth');
 const { count } = require('console');
 const { json } = require('stream/consumers');
 
-// Initialize the database connection
 const db = knex({
   client: 'mysql',
   connection: {
@@ -32,7 +30,6 @@ const db = knex({
 app.use(cors());
 app.use(bodyParser.json());
 
-// Serve static files from the 'public' directory
 app.use(express.static(__dirname + '/public'));
 
 const storage = multer.diskStorage({
@@ -45,9 +42,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// Handle file uploads
 app.post('/stats', upload.single('file'), function (req, res) {
-  // req.file is the uploaded file, and req.body holds the text fields
   console.log('Uploaded file:', req.file);
   console.log('Form data:', req.body);
 });
@@ -189,9 +184,9 @@ app.get('/temp', async (req, res) => {
     ids = await db('cover').insert({
       Date: req.query.date,
       Time: req.query.time,
-      Temp: req.query.temp,
+      Temperature: req.query.temp,
       Humidity: req.query.hemi,
-      PH_value: req.query.ph,
+      pH_value: req.query.ph,
     })
   } catch (e) {
     console.log(e.message)

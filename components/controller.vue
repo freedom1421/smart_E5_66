@@ -73,8 +73,8 @@
                                 @click="bntSensor211">CLOSE</v-btn>
                         </v-col>
                     </v-row>
-                </v-col>
-</v-row>                
+                </v-col> 
+</v-row>               
             </v-main>
 
         </v-layout>
