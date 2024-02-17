@@ -12,6 +12,8 @@ const { register, login } = require('auth');
 const { count } = require('console');
 const { json } = require('stream/consumers');
 
+const apiRouter = express.Router();
+
 const db = knex({
   client: 'mysql',
   connection: {
@@ -42,13 +44,13 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-app.post('/stats', upload.single('file'), function (req, res) {
+apiRouter.post('/stats', upload.single('file'), function (req, res) {
   console.log('Uploaded file:', req.file);
   console.log('Form data:', req.body);
 });
 
 
-app.post('/login', async (req, res) => {
+apiRouter.post('/login', async (req, res) => {
   const { username, password } = req.body;
   const getUserinfo = await db('member').select('username', 'password').where('username', username);
   if (!getUserinfo[0]) {
@@ -76,7 +78,7 @@ app.post('/login', async (req, res) => {
 });
 
 
-app.get('/protected', (req, res) => {
+apiRouter.get('/protected', (req, res) => {
   const token = req.headers.authorization.split(' ')[1]
 
   try {
@@ -94,7 +96,7 @@ app.get('/protected', (req, res) => {
   }
 })
 
-app.get('/insert', async (req, res) => {
+apiRouter.get('/insert', async (req, res) => {
   try {
     console.log(req.query)
     console.log(req.query.name)
@@ -118,7 +120,7 @@ app.get('/insert', async (req, res) => {
   }
 })// insert
 
-app.get('/list', async (req, res) => {
+apiRouter.get('/list', async (req, res) => {
   try {
     console.log('show user')
     let row = await db('member')
@@ -136,7 +138,7 @@ app.get('/list', async (req, res) => {
   }
 });//list
 
-app.get('/delete', async (req, res) => {
+apiRouter.get('/delete', async (req, res) => {
   try {
     console.log('show id=', req.query)
     let row = await db('member').where('id', req.query.id)
@@ -155,7 +157,7 @@ app.get('/delete', async (req, res) => {
   }
 })//delete
 
-app.post("/edit", async (req, res) => {
+apiRouter.post("/edit", async (req, res) => {
   try {
     console.log(req.body);
     let row = await db("member").where("id", "=", req.body.id).update({
@@ -177,7 +179,7 @@ app.post("/edit", async (req, res) => {
   }
 })//edit
 
-app.get('/temp', async (req, res) => {
+apiRouter.get('/temp', async (req, res) => {
   try {
     console.log(req.query)
     console.log(req.query.time)
@@ -197,7 +199,7 @@ app.get('/temp', async (req, res) => {
   }
 })// cover
 
-app.get('/listcover', async (req, res) => {
+apiRouter.get('/listcover', async (req, res) => {
   try {
     console.log('show Cover')
     let row = await db('cover')
@@ -214,6 +216,7 @@ app.get('/listcover', async (req, res) => {
   }
 });//list
 
+app.use('/api', apiRouter);
 
 app.listen(7001, () => {
   console.log('Server is running on port 7001');

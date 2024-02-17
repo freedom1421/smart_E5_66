@@ -7,16 +7,16 @@
                     <v-toolbar density="compact"
                         style="background-color: #ECF4D6; color: #265073; height: 70px; padding-top: 10px;">
                         <h2
-                            style="font-size: 30px; margin-left: 80px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ">
+                            style="font-size: 30px; margin-left: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ">
                             Control Smart Farm</h2>
                         <v-spacer></v-spacer>
                     </v-toolbar>
                 </v-card>
     <!-- HEADDER===================================================================== -->
-<v-row style="align-items: center;">
+<v-row style="align-items: end; justify-content: center; padding-left: 40px; top: 10px;">
                 <v-col style="justify-items: center;">
                     <v-row
-                        style="height: 500px; width: 430px; align-items: center; background-color: #ECF4D6; justify-content: center;  border-radius: 50px; margin: 50px  0px 0px 100px; padding: 10px;">
+                        style="height: 500px; width: 430px; align-items: center; background-color: #ECF4D6; justify-content: center;  border-radius: 50px; margin: 50px  0px 0px 0px; padding: 10px;">
                         <v-btn size="300" variant="tonal" :color="lightColor" class="rounded-circle">
                             <v-icon size="60" :icon="isLight2On"></v-icon>
                         </v-btn>
@@ -36,7 +36,7 @@
                 </v-col>
                 <v-col style="justify-items: center;">
                     <v-row
-                        style="height: 500px; width: 430px; align-items: center; background-color: #ECF4D6; justify-content: center;  border-radius: 50px; margin: 50px  0px 0px 20px; padding: 10px;">
+                        style="height: 500px; width: 430px; align-items: center; background-color: #ECF4D6; justify-content: center;  border-radius: 50px; margin: 50px  0px 0px 0px; padding: 10px;">
                         <v-btn size="300" variant="tonal" :color="lightColor1" class="rounded-circle">
                             <v-icon size="60" :icon="isfan2On"></v-icon>
                         </v-btn>
@@ -106,7 +106,7 @@ export default {
     },
 
     beforeMount() {
-        this.client = mqtt.connect("ws://broker.emqx.io:8083/mqtt");
+        this.client = mqtt.connect("wss://broker.hivemq.com:8884/mqtt");
         this.client.on("connect", () => {
             console.log("on client connect");
             this.client.subscribe("pum1");

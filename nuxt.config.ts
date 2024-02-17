@@ -12,5 +12,13 @@ export default defineNuxtConfig({
       define: {
         'process.env.DEBUG': false,
       },
+      server: {
+        proxy: {
+          '/api': {
+            target: 'http://localhost:7001',
+            ws: true,
+          },
+        },
+      },
     },
   })

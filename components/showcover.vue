@@ -7,7 +7,7 @@
                     <v-toolbar density="compact"
                         style="background-color: #ECF4D6; color: #265073; height: 70px; padding-top: 10px;">
                         <h2
-                            style="font-size: 30px; margin-left: 80px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ">
+                            style="font-size: 30px; padding-left: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ">
                             Show Report</h2>
                         <v-spacer></v-spacer>
                     </v-toolbar>
@@ -15,7 +15,7 @@
 <!-- HEADDER===================================================================== -->
                 <div style="--v-layout-left: 0px; ">
                     <v-data-table :headers="headers" :items="desserts" 
-                        class="elevation-1" style=" padding-left: 60px;">
+                        class="elevation-1" >
                     </v-data-table>
                 </div>
             </v-main>
@@ -65,7 +65,7 @@ export default {
             navigateTo("/")
         },
         async showdata() {
-            const url = 'http://localhost:7001/listcover';  
+            const url = 'http://localhost:7001/api/listcover';  
             const res = await fetch(url);
             const data = await res.json()
             this.desserts = data.datas.reverse();
