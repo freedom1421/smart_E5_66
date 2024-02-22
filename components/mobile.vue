@@ -171,8 +171,8 @@ export default {
       this.client.subscribe("fan2");
       this.client.subscribe("fog1");
       this.client.subscribe("fog2");
-      this.client.subscribe("jtemp1");
-      this.client.subscribe("jtemp2");
+      this.client.subscribe("RC_status");
+      this.client.subscribe("C_status");
       this.client.subscribe("jPH1");
     });
     this.client = mqtt.connect("wss://broker.hivemq.com:8884/mqtt");
@@ -180,13 +180,13 @@ export default {
     console.log("on client connect");
     this.client.on("connect", () => {
       console.log("on client connect");
-      this.client.subscribe("jtemp1");
       this.client.subscribe("jtemp2");
+      this.client.subscribe("RC_status");
       this.client.subscribe("jPH1");
 
     });
     this.client.on("message", (topic, message) => {
-      if (topic === "jtemp1") {
+      if (topic === "RC_status") {
         //console.log("connect_message/temp1=>");
         // message is Buffer
         //  console.log("GOT:", message.toString());
@@ -305,7 +305,7 @@ export default {
       clearInterval(this.intervalId);
     },
     dosometing(){
-      navigateTo('/showmobile');
+      navigateTo('/test');
     },
   },
 }

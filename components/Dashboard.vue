@@ -100,13 +100,13 @@
       console.log("on client connect");
       this.client.on("connect", () => {
         console.log("on client connect");
-        this.client.subscribe("jtemp1");
+        this.client.subscribe("RC_status");
         this.client.subscribe("jtemp2");
         this.client.subscribe("jPH1");
 
       });
       this.client.on("message", (topic, message) => {
-        if (topic === "jtemp1") {
+        if (topic === "RC_status") {
           //console.log("connect_message/temp1=>");
           // message is Buffer
           //  console.log("GOT:", message.toString());
